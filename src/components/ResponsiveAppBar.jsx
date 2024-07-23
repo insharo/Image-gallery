@@ -10,6 +10,7 @@ import FacebookIcon from '@mui/icons-material/Facebook';
 import SvgIcon from '@mui/material/SvgIcon';
 import useMediaQuery from '@mui/material/useMediaQuery';
 import { useTheme } from '@mui/material/styles';
+import Image from "next/image";
 
 function TikTokIcon(props) {
   return (
@@ -36,7 +37,9 @@ export default function ResponsiveAppBar() {
   return (
     <AppBar position="static">
       <Toolbar>
-        <img src="/path-to-your-logo.svg" alt="Logo" style={{ flexGrow: 1 }} />
+        <Image height={50} width={100} src="/image-gallery-logo.png" alt="Logo" >
+        </Image>
+        <div style={{ flexGrow: 1 }} />
         {isMobile ? (
           <>
             <IconButton
