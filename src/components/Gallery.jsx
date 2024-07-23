@@ -26,6 +26,9 @@ const Gallery = () => {
             }
         };
         fetchImages();
+        const intervalId = setInterval(fetchImages, 4000); // Refetch every 4 seconds
+
+        return () => clearInterval(intervalId); // Clean up on component unmount
     }, []);
 
     if (!images || images.length === 0) {
