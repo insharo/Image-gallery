@@ -35,7 +35,7 @@ export default function ResponsiveAppBar() {
   };
 
   return (
-    <AppBar position="static">
+    <AppBar position="static" sx={{ backgroundColor: "#e8b466" }}>
       <Toolbar>
         <Image height={50} width={100} src="/image-gallery-logo.png" alt="Logo" >
         </Image>
