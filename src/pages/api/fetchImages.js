@@ -7,7 +7,9 @@ export default async function handler(req, res) {
   }
 
   try {
-    const records = await base('Images').select().all();
+    const records = await base('Images').select({
+        sort: [{ field: 'CreationTime', direction: 'asc' }]
+    }).all();
     console.log("api records:", records);
 
     if (records.length > 0) {
