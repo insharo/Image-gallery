@@ -7,7 +7,8 @@ const ImgContainer = ({ photo }) => {
                 src={photo.URL}
                 fill={true}
                 alt="Not found"
-                className="object-cover group-hover:opacity-75"
+                className="object-cover group-hover:opacity-75 transition duration-300 ease-in-out group-hover:border-black group-hover:border group-hover:shadow-custom"
+                // className="object-cover group-hover:opacity-75"
             >
             </Image>
         </div>

@@ -14,6 +14,9 @@ module.exports = {
       },
       gridTemplateColumns: {
         'gallery': 'repeat(auto-fit, minmax(250px, 1fr))',
+      },
+      boxShadow: {
+        custom: '0 6px 20px 0 rgba(0, 0, 0, 0.5)',
       }
     },
   },

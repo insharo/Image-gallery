@@ -18,7 +18,7 @@ export default function Home() {
         <h1 className="text-white text-5xl font-thin">YOUR WEDDING GALLERY</h1>
       </section>
       <main
-        className={`max-w-6xl mx-auto ${inter.className}`}
+        className={`max-w-6xl mx-auto ${inter.className} mt-14`}
       >
         <Gallery></Gallery>
       </main>
