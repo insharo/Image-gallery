@@ -7,17 +7,20 @@ module.exports = {
   ],
   theme: {
     extend: {
+      colors: {
+        olive: "#606C38",
+      },
       backgroundImage: {
         "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",
         "gradient-conic":
           "conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))",
       },
       gridTemplateColumns: {
-        'gallery': 'repeat(auto-fit, minmax(250px, 1fr))',
+        gallery: "repeat(auto-fit, minmax(250px, 1fr))",
       },
       boxShadow: {
-        custom: '0 6px 20px 0 rgba(0, 0, 0, 0.5)',
-      }
+        custom: "0 6px 20px 0 rgba(0, 0, 0, 0.5)",
+      },
     },
   },
   plugins: [],

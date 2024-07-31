@@ -57,7 +57,7 @@ const Gallery = () => {
   return (
     <section className="px-2 my-3 grid gap-4 grid-cols-gallery">
       {images.map((image) => (
-        <ImgContainer key={image.ID} photo={image}></ImgContainer>
+        <ImgContainer key={image.ID} photo={image} />
       ))}
     </section>
   );

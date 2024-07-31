@@ -9,6 +9,10 @@ export default function Document(props) {
     <Html lang="en">
       <Head>
         <DocumentHeadTags {...props} />
+        <link
+          href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;700&display=swap"
+          rel="stylesheet"
+        />
       </Head>
       <body>
         <Main />

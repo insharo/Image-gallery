@@ -8,11 +8,11 @@ export default async function handler(req, res) {
   try {
     const records = await base("Images")
       .select({
-        filterByFormula: `{ClientID} = ${process.env.ClientID}`,
+        filterByFormula: `{ClientID} = ${process.env.NEXT_PUBLIC_CLIENT_ID}`,
         sort: [{ field: "CreationTime", direction: "asc" }],
       })
       .all();
-    console.log("api records:", records);
+    // console.log("api records:", records);
 
     if (records.length > 0) {
       res.status(200).json(records.map((record) => record.fields));
