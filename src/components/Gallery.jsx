@@ -1,13 +1,14 @@
-import Image from "next/image";
 import { useEffect, useState } from "react";
 import ImgContainer from "./ImgContainer";
 import CircularProgress from "@mui/material/CircularProgress";
+import ImageModal from "./ImageModal";
 
 const Gallery = () => {
   const [images, setImages] = useState([]);
   console.log("images:", images);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [selectedImage, setSelectedImage] = useState(null);
 
   useEffect(() => {
     const fetchImages = async () => {
@@ -55,11 +56,23 @@ const Gallery = () => {
   }
 
   return (
-    <section className="px-2 my-3 grid gap-4 grid-cols-gallery">
-      {images.map((image) => (
-        <ImgContainer key={image.ID} photo={image} />
-      ))}
-    </section>
+    <>
+      <section className="px-2 my-3 grid gap-4 grid-cols-gallery">
+        {images.map((image) => (
+          <ImgContainer
+            key={image.ID}
+            photo={image}
+            onClick={() => setSelectedImage(image)}
+          />
+        ))}
+      </section>
+      {selectedImage && (
+        <ImageModal
+          image={selectedImage}
+          onClose={() => setSelectedImage(null)}
+        />
+      )}
+    </>
   );
 };
 
