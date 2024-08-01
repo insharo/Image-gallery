@@ -2,7 +2,18 @@
 const nextConfig = {
   reactStrictMode: true,
   images: {
-    domains: ["storage.googleapis.com", "login.sendpulse.com"],
+    remotePatterns: [
+      {
+        protocol: "https",
+        hostname: "storage.googleapis.com",
+        pathname: "/**",
+      },
+      {
+        protocol: "https",
+        hostname: "login.sendpulse.com",
+        pathname: "/**",
+      },
+    ],
   },
   webpack(config) {
     config.module.rules.push({

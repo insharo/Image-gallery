@@ -5,7 +5,7 @@ import ImageModal from "./ImageModal";
 
 const Gallery = () => {
   const [images, setImages] = useState([]);
-  console.log("images:", images);
+  // console.log("images:", images);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [selectedImage, setSelectedImage] = useState(null);
@@ -16,17 +16,17 @@ const Gallery = () => {
       setError(null);
       try {
         const response = await fetch(`/api/fetchImages`);
-        console.log("useEffect fetchImages response: ", response);
+        // console.log("useEffect fetchImages response: ", response);
 
         if (!response.ok) {
           throw new Error("Network response was not ok");
         }
         const data = await response.json();
-        console.log("useEffect fetchImages data: ", data);
+        // console.log("useEffect fetchImages data: ", data);
         setImages(data);
       } catch (error) {
         setError("Failed to fetch images");
-        console.error("Failed to fetch images:", error);
+        // console.error("Failed to fetch images:", error);
       } finally {
         setLoading(false);
       }

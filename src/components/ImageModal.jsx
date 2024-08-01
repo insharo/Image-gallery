@@ -1,13 +1,45 @@
-import { useState } from "react";
+import React, { useState } from "react";
 import Image from "next/image";
-import { Dialog, DialogContent, IconButton } from "@mui/material";
+import { Snackbar, Dialog, DialogContent, IconButton } from "@mui/material";
 import CloseIcon from "@mui/icons-material/Close";
+import { saveAs } from "file-saver";
+import SharePopover from "./SharePopover";
+import DownloadIcon from "../../public/icons/downloadIcon.svg";
+import ShareIcon from "../../public/icons/shareIcon.svg";
+import DeleteIcon from "../../public/icons/deleteIcon.svg";
+// import deleteImageByID from "@/pages/api/deleteImageByID";
+import deleteImageByID from "../pages/api/deleteImageByID";
+import MuiAlert from "@mui/material/Alert";
 
 const ImageModal = ({ image, onClose }) => {
-  //   const [zoom, setZoom] = useState(1);
+  const [anchorEl, setAnchorEl] = useState(null);
+  const [openSnackbar, setOpenSnackbar] = useState(false);
 
-  //   const handleZoomIn = () => setZoom(zoom + 0.1);
-  //   const handleZoomOut = () => setZoom(zoom - 0.1);
+  const downloadImage = (url, filename) => {
+    saveAs(url, filename);
+  };
+  const deleteImage = () => {
+    deleteImageByID([image.RECORD_ID])
+      .then(() => {
+        setOpenSnackbar(true);
+      })
+      .catch((error) => console.error("Delete failed:", error));
+  };
+
+  const handleShareClick = (event) => {
+    setAnchorEl(event.currentTarget);
+  };
+
+  const handleCloseSharePopover = () => {
+    setAnchorEl(null);
+  };
+
+  const handleCloseSnackbar = (event, reason) => {
+    if (reason === "clickaway") {
+      return;
+    }
+    setOpenSnackbar(false);
+  };
 
   return (
     <Dialog open={true} onClose={onClose}>
@@ -24,16 +56,22 @@ const ImageModal = ({ image, onClose }) => {
         </div>
         <div className="flex justify-center items-center">
           <IconButton
-            onClick={() => {}}
-            className="transition-transform transform w-92 rounded-none"
+            onClick={() => downloadImage(image.URL, "downloadedImage.jpg")}
+            className="transition-transform transform w-fit rounded-2xl"
           >
-            <img src="/downloadIcon.svg" alt="Download" />
+            <img src="/icons/downloadIcon.svg" alt="Download" />
           </IconButton>
           <IconButton
-            onClick={() => {}}
-            className="transition-transform transform w-92 rounded-none"
+            onClick={handleShareClick}
+            className="transition-transform transform w-fit rounded-2xl"
           >
-            <img src="/shareIcon.svg" alt="Share" />
+            <img src="/icons/shareIcon.svg" alt="Share" />
+          </IconButton>
+          <IconButton
+            onClick={() => deleteImage()}
+            className="transition-transform transform rounded-2xl w-10"
+          >
+            <DeleteIcon width={24} height={24} />
           </IconButton>
         </div>
         <div className="relative w-full h-full">
@@ -49,7 +87,25 @@ const ImageModal = ({ image, onClose }) => {
             }}
           />
         </div>
+        <SharePopover
+          anchorEl={anchorEl}
+          onClose={handleCloseSharePopover}
+          url={image.URL}
+        />
       </DialogContent>
+      <Snackbar
+        open={openSnackbar}
+        autoHideDuration={6000}
+        onClose={handleCloseSnackbar}
+      >
+        <MuiAlert
+          onClose={handleCloseSnackbar}
+          severity="error"
+          sx={{ width: "100%" }}
+        >
+          Image deleted successfully.
+        </MuiAlert>
+      </Snackbar>
     </Dialog>
   );
 };
