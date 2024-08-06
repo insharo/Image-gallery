@@ -3,14 +3,23 @@ import { Inter } from "next/font/google";
 import Gallery from "../components/Gallery";
 import ResponsiveAppBar from "../components/ResponsiveAppBar";
 import NayyaraLayout from "../components/NayyaraLayout";
+import withAuth from "@/components/withAuth";
+import { useAuth } from "@/contexts/AuthContext";
+import LogoutButton from "@/components/LogoutButton";
 
 const inter = Inter({ subsets: ["latin"] });
 
-export default function Home() {
+function Home() {
+  // const { user, setUser } = useAuth();
+  // console.log("user", user);
+
   const ClientID = process.env.NEXT_PUBLIC_CLIENT_ID;
 
   return (
     <div>
+      <div>
+        <LogoutButton></LogoutButton>
+      </div>
       {/* <ResponsiveAppBar></ResponsiveAppBar> */}
       {ClientID == 2 ? (
         <NayyaraLayout>
@@ -44,7 +53,7 @@ export default function Home() {
     </div>
   );
 }
-
+export default withAuth(Home);
 // <main
 //   className={`flex min-h-screen flex-col items-center justify-between p-24 ${inter.className}`}
 // >
