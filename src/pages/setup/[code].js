@@ -21,7 +21,7 @@ export default function Setup({ codeExists, code, passwordExists }) {
       // alert("Wedding already exists");
       router.push(`/unauthorized`);
     }
-  }, [codeExists, code, router, setCode]);
+  }, [codeExists, code, router, setCode, passwordExists]);
 
   const handleSubmit = async (event) => {
     event.preventDefault();

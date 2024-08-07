@@ -10,11 +10,13 @@ import DeleteIcon from "../../public/icons/deleteIcon.svg";
 // import deleteImageByID from "@/pages/api/deleteImageByID";
 import deleteImageByID from "../pages/api/deleteImageByID";
 import MuiAlert from "@mui/material/Alert";
+import { useAuth } from "@/contexts/AuthContext";
 
 const ImageModal = ({ image, onClose }) => {
   const [anchorEl, setAnchorEl] = useState(null);
   const [openSnackbar, setOpenSnackbar] = useState(false);
-
+  const { user } = useAuth();
+  const role = { user };
   const downloadImage = (url, filename) => {
     saveAs(url, filename);
   };
@@ -48,7 +50,9 @@ const ImageModal = ({ image, onClose }) => {
       </IconButton>
       <DialogContent className="pt-6 px-12 relative">
         <div className="absolute left-0 z-0">
-          <img
+          <Image
+            width={100}
+            height={100}
             src="/enlargeFlower.svg"
             className="w-full h-full object-cover"
             alt="Background Flower"
@@ -59,20 +63,32 @@ const ImageModal = ({ image, onClose }) => {
             onClick={() => downloadImage(image.URL, "downloadedImage.jpg")}
             className="transition-transform transform w-fit rounded-2xl"
           >
-            <img src="/icons/downloadIcon.svg" alt="Download" />
+            <Image
+              src="/icons/downloadIcon.svg"
+              width={150}
+              height={150}
+              alt="Download"
+            />
           </IconButton>
           <IconButton
             onClick={handleShareClick}
             className="transition-transform transform w-fit rounded-2xl"
           >
-            <img src="/icons/shareIcon.svg" alt="Share" />
+            <Image
+              src="/icons/shareIcon.svg"
+              width={130}
+              height={130}
+              alt="Share"
+            />
           </IconButton>
-          <IconButton
-            onClick={() => deleteImage()}
-            className="transition-transform transform rounded-2xl w-10"
-          >
-            <DeleteIcon width={24} height={24} />
-          </IconButton>
+          {role == "admin" ? (
+            <IconButton
+              onClick={() => deleteImage()}
+              className="transition-transform transform rounded-2xl w-10"
+            >
+              <DeleteIcon width={24} height={24} />
+            </IconButton>
+          ) : null}
         </div>
         <div className="relative w-full h-full">
           <Image

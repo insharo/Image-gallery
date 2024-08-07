@@ -3,13 +3,14 @@ import { useAuth } from "@/contexts/AuthContext";
 import { useEffect } from "react";
 
 const withAuth = (Component) => {
-  return (props) => {
+  const AuthenticatedComponent = (props) => {
     const { user } = useAuth();
     const router = useRouter();
 
     useEffect(() => {
       if (!user) {
-        router.push("/unauthorized");
+        // router.push("/unauthorized");
+        router.push("/welcome");
       }
     }, [user, router]);
 
@@ -19,6 +20,12 @@ const withAuth = (Component) => {
 
     return <Component {...props} />;
   };
+
+  AuthenticatedComponent.displayName = `withAuth(${
+    Component.displayName || Component.name || "Component"
+  })`;
+
+  return AuthenticatedComponent;
 };
 
 export default withAuth;
