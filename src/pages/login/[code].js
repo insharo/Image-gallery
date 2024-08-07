@@ -10,7 +10,7 @@ export default function LoginPage({ codeExists, code }) {
 
   const { setUser } = useAuth();
 
-  console.log("entered here");
+  // console.log("entered here");
   useEffect(() => {
     if (!codeExists) {
       router.push("/unauthorized");

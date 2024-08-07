@@ -16,7 +16,7 @@ const ImageModal = ({ image, onClose }) => {
   const [anchorEl, setAnchorEl] = useState(null);
   const [openSnackbar, setOpenSnackbar] = useState(false);
   const { user } = useAuth();
-  const role = { user };
+  const { role } = user;
   const downloadImage = (url, filename) => {
     saveAs(url, filename);
   };
