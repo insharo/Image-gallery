@@ -13,8 +13,8 @@ function CaptureMoment() {
             Ready to Capture Every Moment?
           </h3>
           <p className="text-gray-600 mb-4">
-            Create your event and start sharing memories today. It's free and
-            easy!
+            Create your event and start sharing memories today. It&apos;s free
+            and easy!
           </p>
           <div className="flex gap-x-4">
             <a href="#contact" className="text-pink-600 underline">
